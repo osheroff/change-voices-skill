@@ -21,25 +21,18 @@ class ChangeVoices(MycroftSkill):
         new_voice = self.accents[self.accent_index]
         self.log.info(f"setting voice to {new_voice}")
         new_conf = {'config': {'tts': {'mimic3_tts_plug': { 'speaker': new_voice } }}}
-
-        def _rest(something):
-            self.log.info("enter message callback")
-            time.sleep(2.0)
-            self.log.info("done sleeping")
-            self.speak_dialog('voices.change', wait=True)
-            resp = self.ask_yesno('voices.confirm')
-            if resp == 'no':
-                return self.handle_voices_change(message) 
-            elif resp == 'stop':
-                return 
-            elif resp == 'yes':
-                self.speak("ok")
-
-        self.bus.once('voice.change.finish', _rest)
         self.bus.emit(Message('configuration.patch', new_conf))
-        self.bus.emit(Message('voice.change.finish'))
-        self.log.info(f"emitted events")
 
+        time.sleep(3.0)
+        self.log.info("done sleeping")
+        self.speak_dialog('voices.change', wait=True)
+        resp = self.ask_yesno('voices.confirm')
+        if resp == 'no':
+            return self.handle_voices_change(message) 
+        elif resp == 'stop':
+            return 
+        elif resp == 'yes':
+            self.speak("oh kay")
 
 def create_skill():
     return ChangeVoices()
