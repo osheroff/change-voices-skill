@@ -5,9 +5,6 @@ Try out different voices in mimic3
 Allows for experimenting with different voices contained in the mimic 3 engine
 
 ## Examples
-* "Speak with a british accent"
-* "Speak with an american accent"
-* "What voices do you have"
 * "Try a different voice"
 
 ## Credits
