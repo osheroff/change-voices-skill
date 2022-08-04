@@ -117,6 +117,7 @@ class ChangeVoices(MycroftSkill):
                 self.speak("okay")
                 self.voice = VOICES[self.voice_index]
                 self.configure_voice()
+                return
             else:
                 self.reset_voice()
                 return
